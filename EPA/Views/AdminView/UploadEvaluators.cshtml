@@ -1,0 +1,64 @@
+﻿@using Kendo.Mvc.UI;
+@model EPA.Models.Evaluator
+
+@{
+    Layout = "_Layout";
+}
+
+<div id="ExcelImportDiv">
+
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv1">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+
+    @using (Html.BeginForm("ImportEvaluatorsFromExcel", "AdminView", FormMethod.Post, new { @id = "ExcelImportForm" }))
+    {
+        @Html.Raw("<br />")
+        ;
+        @Html.Raw("<br />")
+        ;
+
+        <h4>Batch Import Evaluators</h4>
+
+        @Html.Raw("<br />");
+
+        @(Html.Kendo().Upload()
+            .Name("formFile")
+            .Multiple(false)
+            .Validation(validation =>
+            {
+                validation.AllowedExtensions(new string[] { "xlsx" });
+                validation.MaxFileSize(10242880);
+            }))
+
+        @Html.Raw("<br />");
+
+        <button type="button" class="k-button" onclick="ImportFromExcel()" id="submitFormBtn">Import</button>
+
+
+
+    }
+</div>
+
+    @(Html.Kendo().Dialog()
+        .Name("loadingDialog")
+        .Title("Please Wait...")
+        .Content("<p>Please wait for the import to complete. It may take a couple of minutes depending on the amount of rows in the excel sheet.</p>")
+        .Modal(false)
+        .Width(400)
+        .Closable(false)
+        .Visible(false)
+    )
+
+
+<script> 
+    function ImportFromExcel() {
+        $("#loadingDialog").data("kendoDialog").open();
+        $('#ExcelImportForm').submit();
+    }
+</script>

@@ -1,0 +1,134 @@
+﻿@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+}
+
+@model EPA.Models.ViewModels.EPAViewModel
+
+<style>
+
+    label {
+        display: block;
+        margin-bottom: 1%;
+    }
+
+    .k-edit-buttons {
+        /*width: 99%;*/
+        text-align: center;
+    }
+
+    .checkboxInputDiv {
+        display: block;
+    }
+
+    .k-textbox {
+        padding: 3px;
+    }
+
+    .k-window {
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+</style>
+
+<div id="viewEPAsGrid"
+
+    <!-- list levels of each columns here -->
+
+    @if (TempData["ValidationMsg"] != null)
+    {
+            <div class="form-row" id="AlertDiv">
+                <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+                </div>
+            </div>
+    }
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    @(
+            Html.Kendo().Grid<EPA.Models.ViewModels.GradingReportViewModel>()
+                .Name("ViewGradesGrid")
+                .Columns(columns =>
+                {
+                    // columns.Bound(m => m.Id).Width(60);
+                    // columns.Bound(m => m.Semester).Filterable(false);
+                    columns.Bound(m => m.Name).Filterable(false);
+                    columns.Bound(m => m.PawsId).Filterable(false);
+                    columns.Bound(m => m.CountOfSelfEvals).Filterable(false);
+                    columns.Bound(m => m.LastSelfEvalDate).Filterable(false);
+                    columns.Bound(m => m.ReflectionSubmissionDate).Filterable(true);
+                    // columns.Command(command => command.Edit()).Width(110);
+                    // columns.Command(c => c.Custom("TrashEPABtn").Text("Trash EPA").Click("TrashEPA"));
+
+                })
+                .ToolBar(toolbar =>
+                {
+                    toolbar.Search();
+                    toolbar.Excel();
+                })
+
+                // .Editable(editable => editable.Mode(GridEditMode.InLine))
+                .Events(e => { e.Cancel("OnCancel"); })
+                .Pageable()
+                .Sortable()
+                .Scrollable()
+                .Groupable()
+                .Excel(excel => excel
+                    .FileName("GradingReport.xlsx")
+                    .Filterable(true)
+                    .ProxyURL(Url.Action("Excel_Export_Save", "AdminView"))
+                    .AllPages(true)
+                )
+                .HtmlAttributes(new { style = "height:550px;" })
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .Batch(false)
+                    .ServerOperation(false)
+                    .Events(events => events.Error("error_handler"))
+                    .Model(model =>
+                    {
+                        model.Id(p => p.Id);
+                        // model.Field(p => p.Semester).Editable(false);
+                        model.Field(p => p.Name).Editable(false);
+                        model.Field(p => p.PawsId).Editable(false);
+                        model.Field(p => p.CountOfSelfEvals).Editable(false);
+                        model.Field(p => p.LastSelfEvalDate).Editable(false);
+                        model.Field(p => p.ReflectionSubmissionDate).Editable(false);
+
+                    })
+
+                    .PageSize(50)
+                    .Read(read => read.Action("ReadGrades", "AdminView"))
+                )
+
+        )
+
+    <script type="text/javascript">
+
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+
+        function OnCancel() {
+            window.top.location.reload();
+        }
+
+
+    </script>
+
+
+
+</div>

@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EPA</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="~/kendo/css/kendo.bootstrap.min.css" />
+    <link rel="stylesheet" href="~/kendo/css/kendo.bootstrap.mobile.min.css" />
+    <link rel="stylesheet" href="~/kendo/css/kendo.common.min.css" />
+    <link rel="stylesheet" href="~/kendo/css/kendo.default.min.css" />
+    <link rel="stylesheet" href="~/kendo/css/kendo.default.mobile.min.css" />
+    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link href="~/css/PurpleAndGold2.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/css/open-iconic/font/css/open-iconic-bootstrap.min.css" asp-append-version="true" />
+
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+
+    @*     <script src="~/kendo/js/jszip.min.js"></script>
+    <script src="~/kendo/js/jquery.min.js"></script> *@
+
+    <script src="~/kendo/js/kendo.all.min.js"></script>
+    <script src="~/kendo/js/kendo.signature.min.js"></script>
+    <script src="~/kendo/js/kendo.aspnetmvc.min.js"></script>
+    
+
+</head>
+
+<body>
+
+    @{
+        EPA.Classes.GetUserInfo getUserInfo = new EPA.Classes.GetUserInfo();
+    }
+
+    <div class="page">
+        <div class="sidebar" id="sidebarForLsuLogo">
+            <div class="top-row navbar navbar-dark">
+                <div class="top-row">
+                    <div class="lsulogo"></div>
+                    <div class="lsulogo">
+                        <p class="text-center">
+                            <span class="icon-lsu_icon"></span><br />
+                            <span class="homepage_lsulogotext">Louisiana State University</span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div id="menuColumn" style="background:#34155c;">
+                <nav class="flex-column" style="background:#34155c;">
+
+                    @if (getUserInfo.IsValidUser() && (getUserInfo.IsStudentUser()))
+                    {
+
+                        <div class="nav-item px-3">
+                            <a class="nav-link" href="~/StudentView/ViewEPAs">
+                                <span class="oi oi-transfer" aria-hidden="true"></span> View EPAs
+                            </a>
+                        </div>
+
+                        <div class="nav-item px-3">
+                            <a class="nav-link" href="~/StudentView/ReflectionPage">
+                                <span class="oi oi-transfer" aria-hidden="true"></span> 5010 Reflection
+                            </a>
+                        </div>
+
+                        <div class="nav-item px-3">
+                            <a class="nav-link" href="~/StudentView/RequestEPA">
+                                <span class="oi oi-transfer" aria-hidden="true"></span> Request EPA
+                            </a>
+                        </div>
+
+                        @* <div class="nav-item px-3">
+                            <a class="nav-link" href="~/StudentView/RequestExternship">
+                                <span class="oi oi-transfer" aria-hidden="true"></span> Request Externship
+                            </a>
+                        </div>
+
+                        <div class="nav-item px-3">
+                            <a class="nav-link" href="~/StudentView/ViewExternships">
+                                <span class="oi oi-transfer" aria-hidden="true"></span> View Externships
+                            </a>
+                        </div> *@
+
+                        <div class="nav-item px-3">
+                            <a class="nav-link" href="~/StudentView/ViewComments">
+                                <span class="oi oi-data-transfer-download" aria-hidden="true"></span> Comment Review
+                            </a>
+                        </div>
+
+                        <div class="nav-item px-3">
+                            <a class="nav-link" href="~/StudentView/Resources">
+                                <span class="oi oi-data-transfer-download" aria-hidden="true"></span> Resources
+                            </a>
+                        </div>
+
+                        <div class="nav-item px-3">
+                            <a class="nav-link" href="~/StudentView/FirstDashboardChoices">
+                                <span class="oi oi-monitor" aria-hidden="true"></span> Dashboard
+                            </a>
+                        </div>
+
+                    }
+                    else if (getUserInfo.IsValidUser() && getUserInfo.IsAdminUser())
+                    {
+
+                        <div class="nav-item px-3">
+                            <a class="nav-link" href="~/AdminView/UploadEvaluators">
+                                <span class="oi oi-transfer" aria-hidden="true"></span> Evaluator Upload
+                            </a>
+                        </div>
+
+                        <div class="nav-item px-3">
+                            <a class="nav-link" href="~/AdminView/UploadStudents">
+                                <span class="oi oi-monitor" aria-hidden="true"></span> Student Upload
+                            </a>
+                        </div>
+
+                        <div class="nav-item px-3">
+                            <a class="nav-link" href="~/AdminView/EditEvaluatorsGrid">
+                                <span class="oi oi-data-transfer-download" aria-hidden="true"></span> Evaluators Grid
+                            </a>
+                        </div>
+
+                        <div class="nav-item px-3">
+                            <a class="nav-link" href="~/AdminView/EditStudentsGrid">
+                                <span class="oi oi-data-transfer-download" aria-hidden="true"></span> Students Grid
+                            </a>
+                        </div>
+
+                        @* <div class="nav-item px-3">
+                            <a class="nav-link" href="~/AdminView/EditExternshipsGrid">
+                                <span class="oi oi-transfer" aria-hidden="true"></span> View Externships
+                            </a>
+                        </div> *@
+
+                        <div class="nav-item px-3">
+                            <a class="nav-link" href="~/AdminView/GradingSummaryReportChoices">
+                                <span class="oi oi-data-transfer-download" aria-hidden="true"></span> Grading Summary
+                            </a>
+                        </div>
+
+                        <div class="nav-item px-3">
+                            <a class="nav-link" href="~/AdminView/SpecificGradingSummaryReportChoices">
+                                <span class="oi oi-data-transfer-download" aria-hidden="true"></span> Student Grades
+                            </a>
+                        </div>
+
+                        @* <div class="nav-item px-3">
+                            <a class="nav-link" href="~/Home/Index" style="text-align: center;width: 150px;margin: 0 auto;" onclick="ClearSessionStorage()">
+                                <span class="oi oi-account-logout" aria-hidden="true"></span> Sign Out
+                            </a>
+                        </div> *@
+
+                    } else if (getUserInfo.IsValidUser() && getUserInfo.IsEvaluatorUser())
+                    {
+                        <div class="nav-item px-3">
+                            <a class="nav-link" href="~/EvaluatorView/ViewAssignedEPAs">
+                                <span class="oi oi-data-transfer-download" aria-hidden="true"></span> Assigned EPAs
+                            </a>
+                        </div>
+                    }
+
+                </nav>
+            </div>
+        </div>
+
+        <div class="content px-4">
+            @RenderBody()
+        </div>
+
+    </div>
+
+    <script>
+
+        function ClearSessionStorage() {
+            sessionStorage.clear();
+        }
+
+    </script>
+
+</body>
+</html>
+

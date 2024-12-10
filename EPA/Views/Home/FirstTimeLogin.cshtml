@@ -1,0 +1,111 @@
+﻿@model EPA.Models.ViewModels.FirstTimeLoginViewModel
+@{
+    ViewBag.Title = "First Time Login";
+    Layout = "_LoginLayout";
+}
+
+<style>
+
+    #signInBtnDiv {
+        width: 100px;
+        margin: 0 auto;
+        margin-top: 8%;
+    }
+
+    #signInBtn {
+        width: 80px;
+        margin: 0 auto;
+    }
+
+    h4 {
+        text-decoration: underline;
+        margin-bottom: 8%;
+    }
+
+
+
+</style>
+
+<div>
+
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div id="signInValid">
+            <div class="alert alert-danger text-center" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+
+    @using (Html.BeginForm("SendEmail", "Home", FormMethod.Post))
+    {
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <a>Questions or issues? Contact Emily Erwin at ecampbell1@lsu.edu</a>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <label>Email:</label>
+            @Html.Kendo().TextBoxFor(e => e.Email)
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <label>First Name:</label>
+            @Html.Kendo().TextBoxFor(e => e.FirstName)
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <label>Last Name:</label>
+            @Html.Kendo().TextBoxFor(e => e.LastName)
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <label>Student or Evaluator?:</label>
+            @Html.Kendo().TextBoxFor(e => e.UserType)
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <label>Are you based at LSU? Answer Yes/No (evaluators only):</label>
+            @Html.Kendo().TextBoxFor(e => e.BasedAtLSU)
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <label>Clinic you are based at (non-LSU evaluators only):</label>
+            @Html.Kendo().TextBoxFor(e => e.Clinic)
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="submitBtnDiv">
+            <button type="submit" class="k-button">Submit</button>
+        </div>
+
+        @Html.Raw("<br />")
+
+        <a href="@Url.Action("Index", "Home")" style="text-decoration:none !important;"><span class="k-button"><i class="fas fa-ban fa-1x pr-2"></i>Cancel</span></a>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+    }
+
+</div>

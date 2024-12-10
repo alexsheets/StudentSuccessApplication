@@ -1,0 +1,46 @@
+﻿@Html.Raw("<br />")
+@Html.Raw("<br />")
+@Html.Raw("<br />")
+
+
+    @(Html.Kendo().Chart()
+        .Name("chart")
+        .Title("See How You Compare:")
+        .Legend(legend => legend
+        .Visible(false)
+        )
+        .ChartArea(chartArea => chartArea
+        .Background("transparent")
+        )
+        .Series(series =>
+        {
+            series.Bar(new double[] { ViewBag.all_users_avg_score }).Name("Class Avg Score");
+            series.Bar(new double[] { ViewBag.specific_user_avg_score }).Name("Your Avg Score");
+        })
+        .CategoryAxis(axis => axis
+            .Name("series-axis")
+            .Line(line => line.Visible(false))
+        )
+        .CategoryAxis(axis => axis
+            .Name("label-axis")
+            .Categories("Class Average Score", "Your Average Score")
+        
+        .MajorGridLines(lines => lines.Visible(false))
+        )
+        .ValueAxis(axis => axis
+        .Numeric()
+        .Max(4)
+        .Line(line => line.Visible(false))
+        .MajorGridLines(lines => lines.Visible(true))
+        )
+        .Tooltip(tooltip => tooltip
+        .Visible(true)
+        .Template("#= series.name #: #= value #")
+        )
+    )
+
+
+
+
+
+

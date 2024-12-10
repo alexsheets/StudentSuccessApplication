@@ -1,0 +1,173 @@
+﻿@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+}
+
+@model EPA.Models.ViewModels.EPAViewModel
+
+<style>
+
+    label {
+        display: block;
+        margin-bottom: 1%;
+    }
+
+    .k-edit-buttons {
+        /*width: 99%;*/
+        text-align: center;
+    }
+
+    .checkboxInputDiv {
+        display: block;
+    }
+
+    .k-textbox {
+        padding: 3px;
+    }
+
+    .k-window {
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+</style>
+
+<div id="viewEPAsGrid"
+
+    <!-- list levels of each columns here -->
+
+    @if (TempData["ValidationMsg"] != null)
+    {
+                <div class="form-row" id="AlertDiv">
+                    <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+                    </div>
+                </div>
+    }
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    @(
+        Html.Kendo().Grid<EPA.Models.ViewModels.StudentSpecificGradingReportViewModel>()
+            .Name("ViewGradesGrid")
+            .Columns(columns =>
+            {
+                // columns.Bound(m => m.Id).Width(60);
+                // columns.Bound(m => m.Semester).Filterable(false);
+                columns.Bound(m => m.Name).Filterable(false);
+                columns.Bound(m => m.PawsId).Filterable(false);
+                columns.Bound(m => m.Epa1Comp).Filterable(false);
+                columns.Bound(m => m.Epa1Grade).Filterable(false);
+                columns.Bound(m => m.Epa1Strengths).Filterable(false);
+                columns.Bound(m => m.Epa1Improve).Filterable(false);
+                columns.Bound(m => m.Epa1Plan).Filterable(false);
+                columns.Bound(m => m.Epa2Comp).Filterable(false);
+                columns.Bound(m => m.Epa2Grade).Filterable(false);
+                columns.Bound(m => m.Epa2Strengths).Filterable(false);
+                columns.Bound(m => m.Epa2Improve).Filterable(false);
+                columns.Bound(m => m.Epa2Plan).Filterable(false);
+                columns.Bound(m => m.Epa3Comp).Filterable(false);
+                columns.Bound(m => m.Epa3Grade).Filterable(false);
+                columns.Bound(m => m.Epa3Strengths).Filterable(false);
+                columns.Bound(m => m.Epa3Improve).Filterable(false);
+                columns.Bound(m => m.Epa3Plan).Filterable(false);
+                columns.Bound(m => m.Epa4Comp).Filterable(false);
+                columns.Bound(m => m.Epa4Grade).Filterable(false);
+                columns.Bound(m => m.Epa4Strengths).Filterable(false);
+                columns.Bound(m => m.Epa4Improve).Filterable(false);
+                columns.Bound(m => m.Epa4Plan).Filterable(false);
+                columns.Bound(m => m.Epa5Comp).Filterable(false);
+                columns.Bound(m => m.Epa5Grade).Filterable(false);
+                columns.Bound(m => m.Epa5Strengths).Filterable(false);
+                columns.Bound(m => m.Epa5Improve).Filterable(false);
+                columns.Bound(m => m.Epa5Plan).Filterable(false);
+
+            })
+            .ToolBar(toolbar =>
+            {
+                toolbar.Search();
+                toolbar.Excel();
+            })
+            .Events(e => { e.Cancel("OnCancel"); })
+            .Pageable()
+            .Sortable()
+            .Scrollable()
+            .Groupable()
+            .Excel(excel => excel
+                .FileName("GradingReport.xlsx")
+                .Filterable(true)
+                .ProxyURL(Url.Action("Excel_Export_Save", "AdminView"))
+                .AllPages(true)
+            )
+            .HtmlAttributes(new { style = "height:550px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Batch(false)
+                .ServerOperation(false)
+                .Events(events => events.Error("error_handler"))
+                .Model(model =>
+                {
+                    model.Id(p => p.Id);
+                    model.Field(p => p.Name).Editable(false);
+                    model.Field(p => p.PawsId).Editable(false);
+                    model.Field(p => p.Epa1Comp).Editable(false);
+                    model.Field(p => p.Epa1Grade).Editable(false);
+                    model.Field(p => p.Epa1Strengths).Editable(false);
+                    model.Field(p => p.Epa1Improve).Editable(false);
+                    model.Field(p => p.Epa1Strengths).Editable(false);
+                    model.Field(p => p.Epa2Comp).Editable(false);
+                    model.Field(p => p.Epa2Grade).Editable(false);
+                    model.Field(p => p.Epa2Strengths).Editable(false);
+                    model.Field(p => p.Epa2Improve).Editable(false);
+                    model.Field(p => p.Epa2Strengths).Editable(false);
+                    model.Field(p => p.Epa3Comp).Editable(false);
+                    model.Field(p => p.Epa3Grade).Editable(false);
+                    model.Field(p => p.Epa3Strengths).Editable(false);
+                    model.Field(p => p.Epa3Improve).Editable(false);
+                    model.Field(p => p.Epa3Plan).Editable(false);
+                    model.Field(p => p.Epa4Comp).Editable(false);
+                    model.Field(p => p.Epa4Grade).Editable(false);
+                    model.Field(p => p.Epa4Strengths).Editable(false);
+                    model.Field(p => p.Epa4Improve).Editable(false);
+                    model.Field(p => p.Epa4Plan).Editable(false);
+                    model.Field(p => p.Epa5Comp).Editable(false);
+                    model.Field(p => p.Epa5Grade).Editable(false);
+                    model.Field(p => p.Epa5Strengths).Editable(false);
+                    model.Field(p => p.Epa5Improve).Editable(false);
+                    model.Field(p => p.Epa5Plan).Editable(false);
+
+                })
+
+                .PageSize(50)
+                .Read(read => read.Action("ReadStudentSpecificGrades", "AdminView"))
+            )
+
+        )
+
+    <script type="text/javascript">
+
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+
+        function OnCancel() {
+            window.top.location.reload();
+        }
+
+
+    </script>
+
+
+
+</div>

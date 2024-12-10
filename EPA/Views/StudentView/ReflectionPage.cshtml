@@ -1,0 +1,140 @@
+﻿@using Kendo.Mvc.UI;
+
+@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+
+}
+
+@model EPA.Models.ViewModels.ReflectionQuestions
+
+<style>
+
+    #ReflectionPage {
+        margin-top: 1%;
+        padding-bottom: 7%;
+        text-align: center !important;
+    }
+
+    label {
+        display: block;
+    }
+
+    .inputDiv1 {
+        display: inline-block;
+    }
+
+    .inputDiv2 {
+        display: inline-block;
+        width: 300px;
+    }
+
+    .submitBtnDiv {
+        margin-top: 4%;
+        margin-bottom: 1%;
+    }
+
+</style>
+
+
+<div id="ReflectionPage">
+
+    <!-- if there is an error, show the message at the top of the page that has been returned from the controller -->
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    @using (Html.BeginForm("SubmitReflectionAnswers", "StudentView", FormMethod.Post, new { @id = "ReflectionPage" }))
+    {
+
+        <div class="inputDiv2" id="dropdownInputDiv">
+            @(
+                Html.Kendo().DropDownListFor(m => m.Season)
+                .DataTextField("Text")
+                .DataValueField("Value")
+                //.Events(x => x.Select("sourceclick"))
+                .SelectedIndex(0)
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("getSeasons", "StudentView");
+                    });
+                })
+                )
+
+        </div>
+
+        <div class="inputDiv2" id="dropdownInputDiv">
+            @(
+                Html.Kendo().DropDownListFor(m => m.Year)
+                .DataTextField("Text")
+                .DataValueField("Value")
+                //.Events(x => x.Select("sourceclick"))
+                .SelectedIndex(0)
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("getYears", "StudentView");
+                    });
+                })
+                )
+
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h5>How did this experience impact your view of veterinary medicine?</h5>
+            @Html.Raw("<br />")
+            @Html.TextAreaFor(x => x.Answer1, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Response" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h5>How did this experience impact your current career choice?</h5>
+            @Html.Raw("<br />")
+            @Html.TextAreaFor(x => x.Answer2, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Response" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h5>How could this experience be improved?</h5>
+            @Html.Raw("<br />")
+            @Html.TextAreaFor(x => x.Answer3, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Response" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+
+
+
+
+
+        <div class="submitBtnDiv">
+            <button type="submit" class="k-button">Submit</button>
+        </div>
+
+        <a href="@Url.Action("ViewEPAs", "StudentView")" style="text-decoration:none !important;"><span class="k-button"><i class="fas fa-ban fa-1x pr-2"></i>Cancel</span></a>
+
+
+    }
+
+</div>

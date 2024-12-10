@@ -1,0 +1,128 @@
+﻿@using Kendo.Mvc.UI;
+
+@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+
+}
+
+@model EPA.Models.Result
+
+<style>
+
+    #EPARequestCreation {
+        margin-top: 3%;
+        padding-bottom: 7%;
+        text-align: center !important;
+    }
+
+    label {
+        display: block;
+    }
+
+    .inputDiv1 {
+        display: inline-block;
+    }
+
+    .inputDiv2 {
+        display: inline-block;
+        width: 150px;
+    }
+
+    .submitBtnDiv {
+        margin-top: 4%;
+        margin-bottom: 1%;
+    }
+
+</style>
+
+
+<div id="EPARequestCreation">
+
+    <!-- if there is an error, show the message at the top of the page that has been returned from the controller -->
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    @using (Html.BeginForm("RequestEPA", "StudentView", FormMethod.Post, new { @id = "RequestEPAForm" }))
+    {
+
+        <div class="inputDiv2">
+            <label>Select Evaluator:</label>
+            @(Html.Kendo().DropDownListFor(e => e.EvaluatorId)
+                .DataSource(s => s.Read(r => r.Action("GetListOfEvaluators", "StudentView")))
+                .DataTextField("LastName")
+                .DataValueField("EvaluatorId")
+                .Filter("contains")
+                .OptionLabel(" "))
+        </div>
+
+        <div class="inputDiv2">
+            <label>Select Rotation:</label>
+            @(Html.Kendo().DropDownListFor(e => e.RotationId)
+                .DataSource(s => s.Read(r => r.Action("GetListOfRotations", "StudentView")))
+                .DataTextField("Title")
+                .DataValueField("RotationId")
+                .Filter("contains")
+                .OptionLabel(" "))
+        </div>
+
+        <div class="inputDiv2">
+            <label>Select Block:</label>
+            @(Html.Kendo().DropDownListFor(e => e.BlockId)
+                .DataSource(s => s.Read(r => r.Action("GetListOfBlocks", "StudentView")))
+                .DataTextField("Title")
+                .DataValueField("BlockId")
+                .Filter("contains")
+                .OptionLabel(" "))
+        </div>
+
+        <div class="inputDiv2">
+            <label>Select EPA:</label>
+            @(Html.Kendo().DropDownListFor(e => e.Epaid)
+                .DataSource(s => s.Read(r => r.Action("GetListOfEpas", "StudentView")))
+                .DataTextField("SectionTag")
+                .DataValueField("Epaid")
+                .Filter("contains")
+                .OptionLabel(" "))
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+
+
+
+        <div class="inputDiv1">
+            <h5>If you have a message to relay to the evaluator, type it here:</h5>
+            @Html.TextAreaFor(x => x.RequestToEvaluator, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Request" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+
+        
+        
+
+        
+
+
+        <div class="submitBtnDiv">
+            <button type="submit" class="k-button">Submit</button>
+        </div>
+
+        <a href="@Url.Action("ViewEPAs", "StudentView")" style="text-decoration:none !important;"><span class="k-button"><i class="fas fa-ban fa-1x pr-2"></i>Cancel</span></a>
+
+
+    }
+
+</div>

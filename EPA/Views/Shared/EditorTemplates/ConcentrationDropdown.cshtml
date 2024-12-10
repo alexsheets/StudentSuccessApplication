@@ -1,0 +1,7 @@
+﻿@model EPA.Models.ViewModels.ConcentrationViewModel
+
+@(Html.Kendo().DropDownListFor(m => m)
+        .DataValueField("ConcentrationId")
+        .DataTextField("Description")
+        .BindTo((System.Collections.IEnumerable)ViewData["concentrations"])
+)

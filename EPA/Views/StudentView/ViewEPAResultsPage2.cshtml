@@ -1,0 +1,93 @@
+﻿@using Kendo.Mvc.UI;
+
+@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+    // need to retrieve questions associated with the EPA as in EPA 1a etc.
+    // need to be saved as result items where the score is 0, 1 or 2 (yes, no, not applicable)
+}
+
+@model EPA.Models.ViewModels.EPASecondPageScoringViewModel
+
+<style>
+
+    #ViewEPAPage2 {
+        margin-top: 3%;
+        padding-bottom: 7%;
+        text-align: center !important;
+    }
+
+    label {
+        display: block;
+    }
+
+    .inputDiv1 {
+        display: inline-block;
+    }
+
+    .inputDiv2 {
+        display: inline-block;
+        width: 150px;
+    }
+
+    .submitBtnDiv {
+        margin-top: 4%;
+        margin-bottom: 4%;
+    }
+
+</style>
+
+
+<div id="ViewEPAPage2">
+
+    <!-- if there is an error, show the message at the top of the page that has been returned from the controller -->
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+
+    <div>
+        <h2>Scoring Guide:</h2>
+        <h5>0: Not Applicable</h5>
+        <h5>1: Observes Only</h5>
+        <h5>2: Direct Supervision</h5>
+        <h5>3: Indirect Supervision</h5>
+        <h5>4: Oversight Only</h5>
+    </div>
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    <h4>What went well:</h4>
+    @Html.Raw("<br />")
+    @Html.DisplayFor(e => e.Comment1)
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    <h4>What could be improved:</h4>
+    @Html.Raw("<br />")
+    @Html.DisplayFor(e => e.Comment2)
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    <h4>Given Score:</h4>
+    @Html.DisplayFor(e => e.AgScore)
+
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+    
+
+    <a href="@Url.Action("ViewEPAs", "StudentView")" style="text-decoration:none !important;"><span class="k-button"><i class="fas fa-ban fa-1x pr-2"></i>Back to EPAs</span></a>
+
+
+</div>

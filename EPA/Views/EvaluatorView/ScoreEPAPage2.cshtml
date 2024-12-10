@@ -1,0 +1,111 @@
+﻿@using Kendo.Mvc.UI;
+
+@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+    // need to retrieve questions associated with the EPA as in EPA 1a etc.
+    // need to be saved as result items where the score is 0, 1 or 2 (yes, no, not applicable)
+
+}
+
+@model EPA.Models.ViewModels.EPASecondPageScoringViewModel
+
+<style>
+
+    #ScoreEPAPage2 {
+        margin-top: 7%;
+        padding-bottom: 7%;
+        text-align: center !important;
+    }
+
+    label {
+        display: block;
+    }
+
+
+
+    .inputDiv2 {
+        display: inline-block;
+        width: 50px;
+    }
+
+    .submitBtnDiv {
+        margin-top: 4%;
+        margin-bottom: 4%;
+    }
+
+    
+
+</style>
+
+
+<div id="ScoreEPAPage2">
+
+    <!-- if there is an error, show the message at the top of the page that has been returned from the controller -->
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+
+
+    @using (Html.BeginForm("SubmitEPAScorePage2Comments", "EvaluatorView", FormMethod.Post, new { @id = "SubmitEPAScorePage2" }))
+    {
+
+        <div class="inputDiv1">
+            <h4>What went well?</h4>
+            @Html.TextAreaFor(x => x.Comment1, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Notes... Descriptions..." })
+
+        </div>
+
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h4>Even better yet:</h4>
+            @Html.TextAreaFor(x => x.Comment2, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Notes... Descriptions..." })
+
+        </div>
+
+
+        <div class="submitBtnDiv">
+            <button type="submit" class="k-button">Submit</button>
+        </div>
+    }
+
+    @using (Html.BeginForm("SubmitEPAScorePage2Score", "EvaluatorView", FormMethod.Post, new { @id = "SubmitEPAScorePage2" }))
+    {
+
+        <div>
+            <h5>1: Observes Only</h5>
+            <h5>2: Required Direct Supervision</h5>
+            <h5>3: Required Indirect Supervision</h5>
+            <h5>4: Oversight Only</h5>
+        </div>
+
+
+        <div class="k-widget k-slider">
+            <div>
+                @(Html.Kendo()
+                    .SliderFor(m => m.AgScore)
+                    .Min(1)
+                    .Max(4)
+                    .SmallStep(1)
+                    .LargeStep(1)
+                    .IncreaseButtonTitle("Right")
+                    .DecreaseButtonTitle("Left")
+                    .Events(e => e.Change("onChange"))
+                )
+            </div>
+        </div>
+
+        <div class="submitBtnDiv">
+            <button type="submit" class="k-button">Submit</button>
+        </div>
+    }
+    
+    <a href="@Url.Action("ViewEPAs", "EvaluatorView")" style="text-decoration:none !important;"><span class="k-button"><i class="fas fa-ban fa-1x pr-2"></i>Cancel</span></a>
+
+
+</div>

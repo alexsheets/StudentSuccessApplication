@@ -1,0 +1,126 @@
+﻿@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+}
+
+@model EPA.Models.ViewModels.EvaluatorViewModel
+
+<style>
+
+    label {
+        display: block;
+        margin-bottom: 1%;
+    }
+
+    .k-edit-buttons {
+        /*width: 99%;*/
+        text-align: center;
+    }
+
+    .checkboxInputDiv {
+        display: block;
+    }
+
+    .k-textbox {
+        padding: 3px;
+    }
+
+    .k-window {
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+    .editEvaluatorGrid {
+        margin-top: 3%;
+    }
+
+</style>
+
+<div id="editEvaluatorGrid"
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv1">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+        @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+
+    @(
+        Html.Kendo().Grid<EPA.Models.ViewModels.EvaluatorViewModel>()
+            .Name("EditEvaluatorsGrid")
+            .Columns(columns =>
+            {
+                @* columns.Bound(m => m.EvaluatorId); *@
+                columns.Bound(m => m.Email).Width(100);
+                columns.Bound(m => m.FirstName).Width(100);
+                columns.Bound(m => m.LastName).Width(100);
+                columns.Bound(m => m.Lsuind).Width(50);
+                columns.Bound(m => m.Clinic).Width(100);
+                columns.Command(cmd => { cmd.Edit(); }).Width(50);
+                columns.Command(cmd => { cmd.Destroy().Text("Remove"); }).Width(50);
+            })
+            .ToolBar(toolbar =>
+            {
+                toolbar.Create();
+                toolbar.Search();
+            })
+            .Editable(editable => editable.Mode(GridEditMode.InLine))
+            .Events(e => { e.Cancel("OnCancel"); })
+            .Pageable()
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:550px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Batch(false)
+                .ServerOperation(false)
+                .Events(events => events.Error("error_handler"))
+                // .Events(e => { e.RequestEnd("OnEditRequestEnd"); })
+                .Model(model =>
+                {
+                    model.Id(i => i.EvaluatorId);
+                    model.Field(p => p.Email);
+                    model.Field(p => p.FirstName);
+                    model.Field(p => p.LastName);
+                    model.Field(p => p.Lsuind);
+                    model.Field(p => p.Clinic);
+                })
+                .PageSize(20)
+                .Read(read => read.Action("ReadEvaluators", "AdminView"))
+                .Update(update => update.Action("UpdateEvaluator", "AdminView"))
+                .Create(create => create.Action("CreateEvaluator", "AdminView"))
+                .Destroy(destroy => destroy.Action("RemoveEvaluator", "AdminView"))
+
+
+            )
+
+        )
+
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+
+        function OnCancel() {
+            window.top.location.reload();
+        }
+
+    </script>
+
+
+</div>

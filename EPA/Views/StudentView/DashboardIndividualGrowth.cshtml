@@ -1,0 +1,47 @@
+﻿@using System.Collections;
+@{
+    ArrayList li = new ArrayList();
+    ArrayList li2 = new ArrayList();
+
+    foreach (var x in ViewBag.list_of_self_scores) {
+        li.Add(Convert.ToInt64(x));
+    }
+    foreach (var x in ViewBag.list_of_eval_scores)
+    {
+        li2.Add(Convert.ToInt64(x));
+    }
+}
+
+@Html.Raw("<br />")
+@Html.Raw("<br />")
+@Html.Raw("<br />")
+
+@(Html.Kendo().Chart()
+         .Name("chart")
+         .Title("EPA Growth Over Time")
+         .Legend(legend => legend
+             .Position(ChartLegendPosition.Bottom)
+         )
+         .Series(series =>
+         {
+             series.Line(li).Name("Self-Evaluated Scores");
+             // series.Line(new double[] { ViewBag.list_of_eval_scores }).Name("Scores From Evaluators");
+             series.Line(li2).Name("Scores From Evaluators");
+         })
+         .CategoryAxis(axis => axis
+             .Categories("")
+             .MajorGridLines(lines => lines.Visible(false))
+         )
+         
+         .ValueAxis(axis => axis
+             .Numeric()
+            .Max(4)
+            .Line(line => line.Visible(false))
+            .MajorGridLines(lines => lines.Visible(true))
+            )
+            .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Template("#= series.name #: #= value #")
+            )
+         )
+    

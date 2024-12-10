@@ -1,0 +1,183 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = EPA
+build_property.RootNamespace = EPA
+build_property.ProjectDir = C:\Users\asheet3\Desktop\EPA\EPA\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\asheet3\Desktop\EPA\EPA
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/AdminView/EditEvaluatorsGrid.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5WaWV3XEVkaXRFdmFsdWF0b3JzR3JpZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/AdminView/EditExternshipsGrid.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5WaWV3XEVkaXRFeHRlcm5zaGlwc0dyaWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/AdminView/EditStudentsGrid.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5WaWV3XEVkaXRTdHVkZW50c0dyaWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/AdminView/GradingSummaryReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5WaWV3XEdyYWRpbmdTdW1tYXJ5UmVwb3J0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/AdminView/GradingSummaryReportChoices.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5WaWV3XEdyYWRpbmdTdW1tYXJ5UmVwb3J0Q2hvaWNlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/AdminView/SpecificGradingSummaryReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5WaWV3XFNwZWNpZmljR3JhZGluZ1N1bW1hcnlSZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/AdminView/SpecificGradingSummaryReportChoices.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5WaWV3XFNwZWNpZmljR3JhZGluZ1N1bW1hcnlSZXBvcnRDaG9pY2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/AdminView/UploadEvaluators.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5WaWV3XFVwbG9hZEV2YWx1YXRvcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/AdminView/UploadStudents.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5WaWV3XFVwbG9hZFN0dWRlbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/EvaluatorView/ScoreEPAPage1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZhbHVhdG9yVmlld1xTY29yZUVQQVBhZ2UxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/EvaluatorView/ScoreEPAPage2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZhbHVhdG9yVmlld1xTY29yZUVQQVBhZ2UyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/EvaluatorView/ViewAssignedEPAs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZhbHVhdG9yVmlld1xWaWV3QXNzaWduZWRFUEFzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/Home/FirstTimeLogin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGaXJzdFRpbWVMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/Shared/EditorTemplates/ConcentrationDropdown.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVkaXRvclRlbXBsYXRlc1xDb25jZW50cmF0aW9uRHJvcGRvd24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/Shared/_LoginLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpbkxheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/DashboardChoices.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcRGFzaGJvYXJkQ2hvaWNlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/DashboardIndividualGrowth.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcRGFzaGJvYXJkSW5kaXZpZHVhbEdyb3d0aC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/FirstDashboardChoices.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcRmlyc3REYXNoYm9hcmRDaG9pY2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/ReflectionPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcUmVmbGVjdGlvblBhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/RequestEPA.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcUmVxdWVzdEVQQS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/RequestExternship.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcUmVxdWVzdEV4dGVybnNoaXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/Resources.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcUmVzb3VyY2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/SelfEvaluationPage1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcU2VsZkV2YWx1YXRpb25QYWdlMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/SelfEvaluationPage2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcU2VsZkV2YWx1YXRpb25QYWdlMi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/ViewComments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcVmlld0NvbW1lbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/ViewEPAResultsPage1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcVmlld0VQQVJlc3VsdHNQYWdlMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/ViewEPAResultsPage2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcVmlld0VQQVJlc3VsdHNQYWdlMi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/ViewEPAs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcVmlld0VQQXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/ViewExternships.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcVmlld0V4dGVybnNoaXBzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/ViewSelfEvalEPAResultsPage1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcVmlld1NlbGZFdmFsRVBBUmVzdWx0c1BhZ2UxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/StudentView/ViewSpecificComments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFZpZXdcVmlld1NwZWNpZmljQ29tbWVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/asheet3/Desktop/EPA/EPA/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-ogi13wvb15

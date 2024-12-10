@@ -1,0 +1,140 @@
+﻿@using Kendo.Mvc.UI;
+@model EPA.Models.ViewModels.StudentViewModel
+
+@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+}
+
+<style>
+
+    label {
+        display: block;
+        margin-bottom: 1%;
+    }
+
+    .k-edit-buttons {
+        /*width: 99%;*/
+        text-align: center;
+    }
+
+    .checkboxInputDiv {
+        display: block;
+    }
+
+    .k-textbox {
+        padding: 3px;
+    }
+
+    .k-window {
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+    .concentrations {
+        text-align: center !important;
+    }
+
+</style>
+
+<div id="editStudentsGrid"
+
+
+        <!-- list levels of each columns here -->
+
+        <div id="concentrations">
+            <h2>Legend for Concentration Ids:</h2>
+            <p>1: Exotics</p>
+            <p>2: Equine</p>
+            <p>3: Food Animal</p>
+            <p>4: Mixed Animal</p>
+            <p>5: Public Practice</p>
+            <p>6: Small Animal</p>
+        </div>
+
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv1">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+            @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+
+    @(
+        Html.Kendo().Grid<EPA.Models.ViewModels.StudentViewModel>()
+            .Name("EditStudentsGrid")
+            .Columns(columns =>
+            {
+                @* columns.Bound(m => m.StudentId); *@
+                columns.Bound(m => m.PawsId).Width(100);
+                columns.Bound(m => m.FirstName).Width(100);
+                columns.Bound(m => m.LastName).Width(100);
+                columns.Bound(m => m.ConcentrationId).Width(25);
+                columns.Bound(m => m.ConcentrationStr).Width(100);
+                columns.Bound(m => m.ClassStr).Width(100);
+                columns.Command(cmd => { cmd.Edit(); }).Width(50);
+                columns.Command(cmd => { cmd.Destroy().Text("Remove"); }).Width(50);
+            })
+            .ToolBar(toolbar =>
+            {
+                toolbar.Create();
+                toolbar.Search();
+            })
+            .Editable(editable => editable.Mode(GridEditMode.InLine))
+            .Events(e => { e.Cancel("OnCancel"); })
+            .Pageable()
+            .NoRecords()
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:550px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Batch(false)
+                .ServerOperation(false)
+                .Events(events => events.Error("error_handler"))
+                // .Events(e => { e.RequestEnd("OnEditRequestEnd"); })
+                .Model(model =>
+                {
+                    model.Id(i => i.StudentId);
+                    model.Field(p => p.StudentId);
+                    model.Field(p => p.PawsId);
+                    model.Field(p => p.FirstName);
+                    model.Field(p => p.LastName);
+                    model.Field(p => p.ConcentrationId);
+                    model.Field(p => p.ConcentrationStr).Editable(false);
+                    model.Field(p => p.ClassStr);
+                })
+                .ServerOperation(false)
+                .PageSize(20)
+                .Read(r => r.Action("ReadStudents", "AdminView"))
+                .Create(r => r.Action("CreateStudent", "AdminView"))
+                .Update(r => r.Action("UpdateStudent", "AdminView"))
+                .Destroy(r => r.Action("RemoveStudent", "AdminView"))
+
+
+            )
+
+    )
+
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+
+        function OnCancel() {
+            window.top.location.reload();
+        }
+
+    </script>
+
+</div>

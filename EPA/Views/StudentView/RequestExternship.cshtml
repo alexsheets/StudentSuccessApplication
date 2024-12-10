@@ -1,0 +1,232 @@
+﻿@using Kendo.Mvc.UI;
+
+@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+
+}
+
+@model EPA.Models.ViewModels.ExternalRegistrationViewModel
+
+<style>
+
+    
+
+    #ExternshipRequestPage {
+        margin-top: 3%;
+        padding-bottom: 7%;
+        text-align: center !important;
+    }
+
+    .dropdownInputDiv {
+        padding-bottom: 5%
+    }
+
+
+    label {
+        display: block;
+        margin-bottom: 2%;
+        width: 200px;
+    }
+
+    .inputDiv1 {
+        display: inline-block;
+        width: 250px;
+    }
+
+    .inputDiv2 {
+        display: inline-block;
+        width: 250px;
+    }
+
+    .submitBtnDiv {
+        margin-top: 4%;
+        margin-bottom: 1%;
+    }
+
+</style>
+
+
+<div id="ExternshipRequestPage">
+
+    <!-- if there is an error, show the message at the top of the page that has been returned from the controller -->
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    @using (Html.BeginForm("ExternshipRequest", "StudentView", FormMethod.Post, new { @id = "ExternshipRequestForm" }))
+    {
+
+        <div class="inputDiv2" id="dropdownInputDiv">
+            <label>Choose practice type: </label>
+            @(
+                Html.Kendo().DropDownListFor(m => m.PracticeType)
+                .DataTextField("Text")
+                .DataValueField("Value")
+                .SelectedIndex(0)
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("getPracticeTypes", "StudentView");
+                    });
+                })
+            )
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        
+
+        <div class="inputDiv2" id="dropdownInputDiv">
+            <label>Choose start date:</label>
+            @(
+                Html.Kendo().DateTimePickerFor(m => m.StartDate)
+            )
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv2" id="dropdownInputDiv">
+            <label>Choose end date:</label>
+            @(
+                Html.Kendo().DateTimePickerFor(m => m.EndDate)
+            )
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <label><h5>Number of weeks (eg 1, 2, 3):</h5></label>
+            @Html.TextAreaFor(x => x.NumWeeks, new { @class = "k-textbox", style = "width: 100%;", placeholder = "1" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv2" id="dropdownInputDiv">
+            <label>Choose blocks for duration of externship: </label>
+            @(Html.Kendo().MultiSelect()
+                .Name("Blocks")
+                .DownArrow(true)
+                .NoDataTemplateId("noDataTemplate")
+                .DataTextField("Text")
+                .DataValueField("Value")
+                .Filter("contains")
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("getBlocksJson", "StudentView");
+                    });
+                })
+            )
+        </div>
+
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h5>Name of practice:</h5>
+            @Html.TextAreaFor(x => x.NameOfPractice, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Practice name" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h5>Mailing address:</h5>
+            @Html.TextAreaFor(x => x.MailingAddress, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Mailing address of practice" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h5>City:</h5>
+            @Html.TextAreaFor(x => x.City, new { @class = "k-textbox", style = "width: 100%;", placeholder = "City of practice" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h5>State:</h5>
+            @Html.TextAreaFor(x => x.State, new { @class = "k-textbox", style = "width: 100%;", placeholder = "State of practice" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h5>Zipcode:</h5>
+            @Html.TextAreaFor(x => x.ZipCode, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Zipcode of practice" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h5>Telephone number (no dashes, plain numbers):</h5>
+            @Html.TextAreaFor(x => x.TelephoneNum, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Telephone number of practice" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h5>Evaluator name:</h5>
+            @Html.TextAreaFor(x => x.EvaluatorName, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Name of evaluator" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h5>Evaluator title:</h5>
+            @Html.TextAreaFor(x => x.EvaluatorTitle, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Title of evaluator" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h5>Evaluator e-mail address:</h5>
+            @Html.TextAreaFor(x => x.EvaluatorEmail, new { @class = "k-textbox", style = "width: 100%;", placeholder = "E-mail of evaluator" })
+        </div>
+
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="submitBtnDiv">
+            <button type="submit" class="k-button">Submit</button>
+        </div>
+
+        <a href="@Url.Action("ViewEPAs", "StudentView")" style="text-decoration:none !important;"><span class="k-button"><i class="fas fa-ban fa-1x pr-2"></i>Cancel</span></a>
+
+
+    }
+
+</div>

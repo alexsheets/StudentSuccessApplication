@@ -1,0 +1,104 @@
+﻿@using Kendo.Mvc.UI;
+
+@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+
+}
+
+@model EPA.Models.ResultItem
+
+<style>
+
+    #SelfEvaluationPage1 {
+        margin-top: 1%;
+        padding-bottom: 7%;
+        text-align: center !important;
+    }
+
+    label {
+        display: block;
+    }
+
+    .inputDiv1 {
+        display: inline-block;
+    }
+
+    .inputDiv2 {
+        display: inline-block;
+        width: 150px;
+    }
+
+    .submitBtnDiv {
+        margin-top: 4%;
+        margin-bottom: 4%;
+    }
+
+    div.slider {
+        width: 60%;
+    }
+
+    div.slider .k-slider-selection {
+        display: none;
+    }
+
+</style>
+
+
+<div id="SelfEvaluationPage1">
+
+    <!-- if there is an error, show the message at the top of the page that has been returned from the controller -->
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    @using (Html.BeginForm("SubmitSelfEvaluationPage2", "StudentView", FormMethod.Post, new { @id = "SelfEvalPage2" }))
+    {
+
+        <div>
+            <p>1: Observes Only - I would not be able to complete this EPA, even with direct, pro-active supervision.</p>
+            <p>2: Required Direct Supervision - I would need direct, pro-active supervision to complete this EPA.</p>
+            <p>3: Required Indirect Supervision - I would be able to complete this EPA without a supervisor in the room, but would need a supervisor to be quickly available for assistance.</p>
+            <p>4: Oversight Only - I would be able to complete this EPA unsupervised.</p>
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+
+        <div class="score pb-3 mt-4">
+            <label class="k-label">Overall Score for EPA:</label><span id="ScoreVal" class="badge bg-info k-ml-5 k-mr-0"></span>
+            @Html.Raw("<br />")
+            <div>
+                @(
+                Html.Kendo()
+                    .SliderFor(m => m.Score)
+                    .IncreaseButtonTitle("Right")
+                    .DecreaseButtonTitle("Left")
+                    .Min(1)
+                    .Max(4)
+                    .SmallStep(1)
+                    .LargeStep(1)
+                    .Value(1)
+                    .HtmlAttributes(new { @class = "slider", title = "Slider" })
+                )
+            </div>
+        </div>
+
+        <div class="submitBtnDiv">
+            <button type="submit" class="k-button">Submit</button>
+        </div>
+
+        <a href="@Url.Action("ViewEPAs", "StudentView")" style="text-decoration:none !important;"><span class="k-button"><i class="fas fa-ban fa-1x pr-2"></i>Cancel</span></a>
+
+
+    }
+
+</div>

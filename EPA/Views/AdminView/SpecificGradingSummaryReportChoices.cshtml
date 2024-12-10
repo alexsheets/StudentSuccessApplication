@@ -1,0 +1,106 @@
+﻿@using Kendo.Mvc.UI;
+
+@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+
+}
+
+@model EPA.Models.ViewModels.GradingReportChoicesViewModel
+
+<style>
+
+    #EPARequestCreation {
+        margin-top: 3%;
+        padding-bottom: 7%;
+        text-align: center !important;
+    }
+
+    label {
+        display: block;
+    }
+
+    .inputDiv1 {
+        display: inline-block;
+    }
+
+    .inputDiv2 {
+        display: inline-block;
+        width: 300px;
+    }
+
+    .submitBtnDiv {
+        margin-top: 4%;
+        margin-bottom: 1%;
+    }
+
+</style>
+
+
+<div id="EPARequestCreation">
+
+    <!-- if there is an error, show the message at the top of the page that has been returned from the controller -->
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+
+    @using (Html.BeginForm("SubmitInitStudentReportChoices", "AdminView", FormMethod.Post, new { @id = "SubmitInitStudentReportChoicesForm" }))
+    {
+
+        <div class="inputDiv2" id="dropdownInputDiv">
+            <label>Choose start date:</label>
+            @(
+                Html.Kendo().DateTimePickerFor(m => m.StartDate)
+                )
+
+        </div>
+
+        <div class="inputDiv2" id="dropdownInputDiv">
+            <label>Choose end date:</label>
+            @(
+                Html.Kendo().DateTimePickerFor(m => m.EndDate)
+                )
+
+        </div>
+
+        <div class="inputDiv2" id="dropdownInputDiv">
+            <label>Choose year/class of students:</label>
+            @(
+                Html.Kendo().DropDownListFor(m => m.Class)
+                .DataTextField("Text")
+                .DataValueField("Value")
+                //.Events(x => x.Select("sourceclick"))
+                .SelectedIndex(0)
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("getYears", "AdminView");
+                    });
+                })
+                )
+
+        </div>
+
+
+        @Html.Raw("<br />")
+
+
+
+
+
+
+        <div class="submitBtnDiv">
+            <button type="submit" class="k-button">Submit</button>
+        </div>
+
+        <a href="@Url.Action("EditStudentsGrid", "AdminView")" style="text-decoration:none !important;"><span class="k-button"><i class="fas fa-ban fa-1x pr-2"></i>Cancel</span></a>
+
+
+    }
+
+</div>

@@ -1,0 +1,153 @@
+﻿@using Kendo.Mvc.UI;
+
+@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+    // need to retrieve questions associated with the EPA as in EPA 1a etc. 
+    // need to be saved as result items where the score is 0, 1 or 2 (yes, no, not applicable)
+    
+}
+
+@model EPA.Models.ResultItem
+
+<style>
+
+    #ScoreEPAPage1 {
+        margin-top: 2%;
+        padding-bottom: 7%;
+        text-align: center !important;
+    }
+
+    label {
+        display: block;
+    }
+
+    .inputDiv1 {
+        display: inline-block;
+    }
+
+    .inputDiv2 {
+        display: inline-block;
+        width: 150px;
+    }
+
+    .submitBtnDiv {
+        margin-top: 4%;
+        margin-bottom: 4%;
+    }
+
+    h4, h5 {
+      width: 50%;
+      height: 60px;
+      margin: 0;
+      padding: 0;
+      display: inline;
+    }​
+
+    div.slider {
+        width: 300%;
+    }
+
+    div.slider .k-slider-selection {
+        display: none;
+    }
+
+</style>
+
+
+<div id="ScoreEPAPage1">
+
+    <!-- if there is an error, show the message at the top of the page that has been returned from the controller -->
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+    @Html.Raw("<br />")
+
+
+    <h2>Questions associated with this EPA:</h2>
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+
+    <!-- for each question in the viewbag, we want to create a new result item -->
+    @foreach (var question in ViewBag.questions)
+    {
+        <h4 >@question.QuestionId</h4> <h5>@question.QuestionText</h5>
+        @Html.Raw("<br />")        
+        @Html.Raw("<br />")      
+    }
+
+    @Html.Raw("<br />")      
+    @Html.Raw("<br />")      
+    @Html.Raw("<br />")      
+    @Html.Raw("<br />")      
+    @Html.Raw("<br />")      
+
+    @using (Html.BeginForm("SubmitEPAScorePage1", "EvaluatorView", FormMethod.Post, new { @id = "SubmitEPAScorePage1" }))
+    {
+
+
+        <!-- set the value for question ID using the current question from the viewbag. parameter is hidden because it requires no input from user -->
+        <!-- this just makes it easier for us to save a new result item. but could result in a leak potentially? -->
+
+        <div class="inputDiv1">
+            <label>Type the question ID you are giving a score to:</label>
+            @Html.Kendo().TextBoxFor(e => e.QuestionId)
+        </div>
+
+
+
+        /* <div class="k-widget k-slider">
+
+            <div>
+                @(Html.Kendo()
+                    .SliderFor(m => m.Score)
+                    .Min(0)
+                    .Max(2)
+                    .SmallStep(1)
+                    .LargeStep(1)
+                    .Value(0)
+                    .IncreaseButtonTitle("Right")
+                    .DecreaseButtonTitle("Left")
+                    .Events(e => e.Change("onChange"))
+
+                    )
+            </div>
+
+        </div> */
+
+        <div class="score pb-3 mt-4">
+            <div>
+                @(
+                Html.Kendo()
+                    .SliderFor(m => m.Score)
+                    .IncreaseButtonTitle("Right")
+                    .DecreaseButtonTitle("Left")
+                    .Min(0)
+                    .Max(2)
+                    .SmallStep(1)
+                    .LargeStep(1)
+                    .Value(0)
+                    .HtmlAttributes(new { @class = "slider", title = "Slider" })
+                )
+            </div>
+        </div>
+
+
+
+        <div class="submitBtnDiv">
+            <button type="submit" class="k-button">Submit</button>
+        </div>
+    }
+
+    <a href="@Url.Action("ScoreEPAPage2", "EvaluatorView")" style="text-decoration:none !important;"><span class="k-button"><i class="fas fa-ban fa-1x pr-2"></i>Progress</span></a>
+
+    <a href="@Url.Action("ViewAssignedEPAs", "EvaluatorView")" style="text-decoration:none !important;"><span class="k-button"><i class="fas fa-ban fa-1x pr-2"></i>Cancel</span></a>
+
+   
+</div>

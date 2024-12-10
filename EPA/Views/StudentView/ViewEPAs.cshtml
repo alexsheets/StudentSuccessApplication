@@ -1,0 +1,183 @@
+﻿<!-- trying to use an editable grid for this -->
+@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+}
+
+@model EPA.Models.ViewModels.EPAViewModel
+
+<style>
+
+    #viewEPAsGrid {
+        margin-top: 3%;
+        padding-bottom: 7%;
+        text-align: center !important;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 1%;
+    }
+
+    .k-edit-buttons {
+        /*width: 99%;*/
+        text-align: center;
+    }
+
+    .checkboxInputDiv {
+        display: block;
+    }
+
+    .k-textbox {
+        padding: 3px;
+    }
+
+    .k-window {
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+</style>
+
+<div id="viewEPAsGrid"
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+
+    @Html.Raw("<br />")
+
+
+    @(
+        Html.Kendo().Grid<EPA.Models.ViewModels.EPAViewModel>()
+            .Name("ViewEPAsGrid")
+            .Columns(columns =>
+            {
+                columns.Bound(m => m.EvaluatorName).Filterable(false);
+                columns.Bound(m => m.EvaluatorEmail).Filterable(false);
+                columns.Bound(m => m.Rotation).Filterable(false);
+                columns.Bound(m => m.Block).Filterable(false);
+                columns.Bound(m => m.ActivityTag).Filterable(false);
+                columns.Bound(m => m.Status).Filterable(true);
+                columns.Bound(m => m.DateRequested).Format("{0:MM/dd/yyyy}").Width(150);
+                // columns.Command(command => command.Edit()).Width(110);
+                columns.Command(c => c.Custom("ViewFormBtn").Text("View EPA").Click("ViewForm"));
+                columns.Command(c => c.Custom("TrashEPABtn").Text("Trash EPA").Click("TrashEPA"));
+                columns.Command(c => c.Custom("SelfEvalBtn").Text("Score EPA").Click("ScoreEPA"));
+
+            })
+            .ToolBar(toolbar =>
+            {
+                // toolbar.Create();
+                toolbar.Search();
+            })
+            // .Editable(editable => editable.Mode(GridEditMode.InLine))
+            .Events(e => { e.Cancel("OnCancel"); })
+            .Pageable()
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:550px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Batch(false)
+                .ServerOperation(false)
+                .Events(events => events.Error("error_handler"))
+                .Model(model =>
+                {
+                    model.Id(p => p.ResultId);
+                    model.Field(p => p.ResultId).Editable(false);
+                    model.Field(p => p.EvaluatorName).Editable(false);
+                    model.Field(p => p.EvaluatorEmail).Editable(false);
+                    model.Field(p => p.Rotation).Editable(false);
+                    model.Field(p => p.Block).Editable(false);
+                    model.Field(p => p.ActivityTag).Editable(false);
+                    model.Field(p => p.Status).Editable(false);
+                    model.Field(p => p.DateRequested).Editable(false);
+
+                })
+
+                .PageSize(50)
+                .Read(read => read.Action("ReadEPAs", "StudentView"))
+            )
+
+    )
+
+    <script type="text/javascript">
+
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+
+        function OnCancel() {
+            window.top.location.reload();
+        }
+
+        function ViewForm(e){
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            var resultId = dataItem.ResultId;
+            // modeled after addsignature in assetassignmentqueue view in asset tracker 
+            $.post("/StudentView/ViewResultsOfEPA", { resultId: resultId }, function (data) {
+                if (data == "Continue to View EPA Evaluated by Evaluator"){
+                    var url = '@Url.Content("~/StudentView/ViewEPAResultsPage1")';
+                    window.top.location.href = url;
+                }
+                else if (data == "Continue to View EPA Self Evaluated"){
+                    var url = '@Url.Content("~/StudentView/ViewSelfEvalEPAResultsPage1")';
+                    window.top.location.href = url;
+                }
+                else{
+                    window.top.location.reload();
+                }
+            });
+        }
+
+        function TrashEPA(e) {
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            var resultId = dataItem.ResultId;
+            $.post("/StudentView/HideEPA", { resultId: resultId }, function (data) {
+                if (data == "EPA was removed") {
+                    var url = '@Url.Content("~/StudentView/ViewEPAs")';
+                    window.top.location.href = url;
+                }
+                else {
+                    window.top.location.reload();
+                }
+            });
+        }
+
+        function ScoreEPA(e) {
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            var resultId = dataItem.ResultId;
+            $.post("/StudentView/SelfEvalEPA", { resultId: resultId }, function (data) {
+                if (data == "Proceed to score EPA Page 1") {
+                    var url = '@Url.Content("~/StudentView/SelfEvaluationPage1")';
+                    window.top.location.href = url;
+                } else if (data == "Proceed to score EPA Page 2") {
+                    var url = '@Url.Content("~/StudentView/SelfEvaluationPage2")';
+                    window.top.location.href = url;
+                }
+                else {
+                    window.top.location.reload();
+                }
+            });
+        }
+
+
+    </script>
+
+
+
+</div>

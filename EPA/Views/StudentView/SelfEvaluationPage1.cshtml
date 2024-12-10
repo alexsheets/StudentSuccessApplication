@@ -1,0 +1,110 @@
+﻿@using Kendo.Mvc.UI;
+
+@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+
+}
+
+@model EPA.Models.ResultItem
+
+<style>
+
+    #SelfEvaluationPage2 {
+        margin-top: 1%;
+        padding-bottom: 7%;
+        text-align: center !important;
+    }
+
+    label {
+        display: block;
+    }
+
+    .inputDiv1 {
+        display: inline-block;
+    }
+
+    .inputDiv2 {
+        display: inline-block;
+        width: 300px;
+    }
+
+    .submitBtnDiv {
+        margin-top: 4%;
+        margin-bottom: 1%;
+    }
+
+</style>
+
+
+<div id="SelfEvaluationPage2">
+
+    <!-- if there is an error, show the message at the top of the page that has been returned from the controller -->
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+    <h4>Reminder of concepts pertaining to this EPA:</h4>
+    @Html.Raw("<br />")
+    @foreach (var question in ViewBag.questions)
+    {
+        <h5>@question.QuestionText</h5>
+    }
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    @using (Html.BeginForm("SubmitSelfEvaluationPage1", "StudentView", FormMethod.Post, new { @id = "SelfEvalPage1" }))
+    {
+
+        <div class="inputDiv1">
+            <h5>What steps within this EPA are my current strengths?</h5>
+            @Html.Raw("<br />")
+            @Html.TextAreaFor(x => x.SelfEvalReflection1, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Response" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h5>What steps within this EPA could I improve upon?</h5>
+            @Html.Raw("<br />")
+            @Html.TextAreaFor(x => x.SelfEvalReflection2, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Response" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+        <div class="inputDiv1">
+            <h5>What is my plan for improving my performance on this EPA?</h5>
+            @Html.Raw("<br />")
+            @Html.TextAreaFor(x => x.SelfEvalReflection3, new { @class = "k-textbox", style = "width: 100%;", placeholder = "Response" })
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+
+
+
+
+
+        <div class="submitBtnDiv">
+            <button type="submit" class="k-button">Submit</button>
+        </div>
+
+        <a href="@Url.Action("ViewEPAs", "StudentView")" style="text-decoration:none !important;"><span class="k-button"><i class="fas fa-ban fa-1x pr-2"></i>Cancel</span></a>
+
+
+    }
+
+</div>

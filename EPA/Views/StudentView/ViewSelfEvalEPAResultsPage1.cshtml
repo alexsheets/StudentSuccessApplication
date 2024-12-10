@@ -1,0 +1,106 @@
+﻿@using Kendo.Mvc.UI;
+
+@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+    // need to retrieve questions associated with the EPA as in EPA 1a etc.
+    // need to be saved as result items where the score is 0, 1 or 2 (yes, no, not applicable)
+}
+
+@model EPA.Models.ResultItem
+
+<style>
+
+    #ViewEPAPage1 {
+        margin-top: 3%;
+        padding-bottom: 7%;
+        text-align: center !important;
+    }
+
+    label {
+        display: block;
+    }
+
+    .inputDiv1 {
+        display: inline-block;
+    }
+
+    .inputDiv2 {
+        display: inline-block;
+        width: 500px;
+    }
+
+    .submitBtnDiv {
+        margin-top: 4%;
+        margin-bottom: 4%;
+    }
+
+</style>
+
+
+<div id="ViewEPAPage1">
+
+    <!-- if there is an error, show the message at the top of the page that has been returned from the controller -->
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+
+    <div class="inputDiv1">
+        <h5>What steps within this EPA are my current strengths?</h5>
+        @Html.Raw("<br />")
+        <div class="inputDiv2">
+
+            <p>@ViewBag.Comment1</p>
+        </div>
+    </div>
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    <div class="inputDiv1">
+        <h5>What steps within this EPA could I improve upon?</h5>
+        @Html.Raw("<br />")
+        <div class="inputDiv2">
+
+            <p>@ViewBag.Comment2</p>
+        </div>
+    </div>
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    <div class="inputDiv1">
+        <h5>What is my plan for improving upon this EPA?</h5>
+        @Html.Raw("<br />")
+        <div class="inputDiv2">
+
+            <p>@ViewBag.Comment3</p>
+        </div>
+    </div>
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    <div class="inputDiv1">
+        <h5>Aggregate Score Given:</h5>
+        @Html.Raw("<br />")
+        <div class="inputDiv2">
+
+            <p>@ViewBag.AgScore</p>
+        </div>
+    </div>
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    <a href="@Url.Action("ViewEPAs", "StudentView")" style="text-decoration:none !important;"><span class="k-button"><i class="fas fa-ban fa-1x pr-2"></i>Back</span></a>
+
+
+</div>

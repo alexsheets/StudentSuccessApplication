@@ -1,0 +1,82 @@
+﻿@using Kendo.Mvc.UI;
+
+@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+
+}
+
+@model EPA.Models.ViewModels.ResultInformationViewModel
+
+<style>
+
+    #EPACommentView {
+        margin-top: 2%;
+        padding-bottom: 7%;
+        text-align: center !important;
+    }
+
+    label {
+        display: block;
+    }
+
+    .inputDiv1 {
+        display: inline-block;
+    }
+
+    .inputDiv2 {
+        display: inline-block;
+        width: 150px;
+    }
+
+
+
+</style>
+
+
+<div id="EPACommentView">
+
+    <!-- if there is an error, show the message at the top of the page that has been returned from the controller -->
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+
+    @Html.Raw("<br />")
+    @Html.Raw("<br />")
+
+    @using (Html.BeginForm("RetrieveComments", "StudentView", FormMethod.Post, new { @id = "SubmitResultToRetrieveComments" }))
+    {
+
+        <label>Select EPA to view comments:</label>
+        <div >
+            
+            <!-- need to change to return from the resultcomments table -->
+            @(
+                Html.Kendo().DropDownListFor(e => e.ResultId)
+                .DataSource(s => s.Read(r => r.Action("GetListOfResults", "StudentView")))
+                .DataTextField("FullDesc")
+                .DataValueField("ResultId")
+                .Filter("contains")
+                
+                
+                )
+        </div>
+
+        @Html.Raw("<br />")
+        @Html.Raw("<br />")
+
+
+        <div class="submitBtnDiv">
+            <button type="submit" class="k-button">Submit</button>
+        </div>
+        @Html.Raw("<br />")
+
+
+        <a href="@Url.Action("ViewEPAs", "StudentView")" style="text-decoration:none !important;"><span class="k-button"><i class="fas fa-ban fa-1x pr-2"></i>Cancel</span></a>
+    }
+
+</div>

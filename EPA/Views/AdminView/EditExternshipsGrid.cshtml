@@ -1,0 +1,142 @@
+﻿@{
+    EPA.Classes.GetDbItems dbItemsGet = new EPA.Classes.GetDbItems();
+}
+
+@model EPA.Models.ViewModels.ExternalRegistrationViewModel
+
+<style>
+
+    #viewExternships {
+        margin-top: 3%;
+        padding-bottom: 7%;
+        text-align: center !important;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 1%;
+    }
+
+    .k-edit-buttons {
+        /*width: 99%;*/
+        text-align: center;
+    }
+
+    .checkboxInputDiv {
+        display: block;
+    }
+
+    .k-textbox {
+        padding: 3px;
+    }
+
+    .k-window {
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+</style>
+
+<div id="viewExternships"
+    @if (TempData["ValidationMsg"] != null)
+    {
+        <div class="form-row" id="AlertDiv">
+            <div class="alert alert-danger text-center" style="width:400px;margin:0 auto;margin-top:2%;" role="alert">
+                @TempData["ValidationMsg"]
+            </div>
+        </div>
+    }
+
+    @Html.Raw("<br />")
+
+
+    @(
+        Html.Kendo().Grid<EPA.Models.ViewModels.ExternalRegistrationViewModel>()
+            .Name("ViewExternshipsGrid")
+            .Columns(columns =>
+            {
+                columns.Bound(m => m.EvaluatorName).Filterable(false);
+                columns.Bound(m => m.EvaluatorEmail).Filterable(false);
+                columns.Bound(m => m.PracticeType).Filterable(false);
+                columns.Bound(m => m.NameOfPractice).Filterable(false);
+                columns.Bound(m => m.Blocks).Filterable(false);
+                columns.Bound(m => m.StartDate).Format("{0:MM/dd/yyyy}").Width(150);
+                columns.Bound(m => m.EndDate).Format("{0:MM/dd/yyyy}").Width(150);
+                columns.Command(c => c.Custom("TrashExternshipBtn").Text("Trash").Click("TrashExternship"));
+
+            })
+            .ToolBar(toolbar =>
+            {
+                // toolbar.Create();
+                toolbar.Search();
+            })
+            // .Editable(editable => editable.Mode(GridEditMode.InLine))
+            .Events(e => { e.Cancel("OnCancel"); })
+            .Pageable()
+            .Sortable()
+            .Scrollable()
+            .HtmlAttributes(new { style = "height:550px;" })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Batch(false)
+                .ServerOperation(false)
+                .Events(events => events.Error("error_handler"))
+                .Model(model =>
+                {
+                    model.Id(p => p.ExternshipId);
+                    model.Field(p => p.EvaluatorName).Editable(false);
+                    model.Field(p => p.EvaluatorEmail).Editable(false);
+                    model.Field(p => p.PracticeType).Editable(false);
+                    model.Field(p => p.Blocks).Editable(false);
+                    model.Field(p => p.NameOfPractice).Editable(false);
+                    model.Field(p => p.StartDate).Editable(false);
+                    model.Field(p => p.EndDate).Editable(false);
+
+                })
+
+                .PageSize(50)
+                .Read(read => read.Action("ReadExternships", "StudentView"))
+            )
+
+    )
+
+    <script type="text/javascript">
+
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+
+        function OnCancel() {
+            window.top.location.reload();
+        }
+
+        function TrashExternship(e) {
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            var externshipId = dataItem.ExternshipId;
+            $.post("/StudentView/HideExternship", { externshipId: externshipId }, function (data) {
+                if (data == "Externship was removed") {
+                    var url = '@Url.Content("~/StudentView/ViewExternships")';
+                    window.top.location.href = url;
+                }
+                else {
+                    window.top.location.reload();
+                }
+            });
+        }
+
+
+    </script>
+
+
+
+</div>
