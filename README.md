@@ -5,3 +5,7 @@ application).
 
 Database connection via SQL using Entity Framework models and DbContext connection. The GetDbItems and SetDbItems in the /classes subdirectory are used as an easy
 abstraction for getting and setting database items. 
+
+
+
+I am unsure why it says the large part of this project is written in CSS, I have even deleted most CSS files but it still says the same.
